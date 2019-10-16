@@ -13,7 +13,7 @@ The project tasks involved the design of fact and dimension tables for a star sc
 
 ## Schema for Song Play Analysis
 Using the song and log datasets, a star schema optimized for queries on song play was analysis was created based on the following entity relationship diagram:
-![ERD image](/songplays erd.png)
+![ERD image](/songplays_erd.png)
 
 ## Data and Code
 * The main analysis is contained in the 2019 Stack Overflow Survey Analysis.ipynb jupyter notebook. All the functions and code, as well as the rationale behind decisions taken is contained in this notebook.
