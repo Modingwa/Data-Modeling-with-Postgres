@@ -6,26 +6,30 @@ The project tasks involved the design of fact and dimension tables for a star sc
 
 ## Table of contents
 
-* [Database design](#summary-of-results)
+* [Database design](#Schema-for-Song-Play-Analysis)
 * [Data and Code](#data-and-code)
 * [Prerequisites](#prerequisites)
 * [Instructions on running the application](#instructions-on-running-the-application)
 
 ## Schema for Song Play Analysis
-Using the song and log datasets, a star schema optimized for queries on song play was analysis was created based on the following entity relationship diagram:
+Using the song and log datasets, a star schema optimized for queries on song play analysis was created based on the following entity relationship diagram:
 ![ERD image](/songplays_erd.png)
 
 ## Data and Code
-* The main analysis is contained in the 2019 Stack Overflow Survey Analysis.ipynb jupyter notebook. All the functions and code, as well as the rationale behind decisions taken is contained in this notebook.
+In addition to the data files, the project workspace includes six files:
+* **test.ipynb** displays the first few rows of each table to let you check your database.
+* **create_tables.py** drops and creates database tables. This file is run on the command line to reset tables prior to running the ETL scripts.
+* **etl.ipynb** reads and processes a single file from song_data and log_data and loads the data into database tables. This notebook contains detailed instructions on the ETL process for each of the tables.
+* **etl.py** reads and processes files from song_data and log_data and loads them into the fact and dimension tables.
+* **sql_queries.py** contains all the projects sql queries, and is imported into the last three files above.
 
-Data for the analysis is available at: [survey datasets](https://insights.stackoverflow.com/survey)
 ## Prerequisites
-* Numpy
+* psycopg2
 * Pandas
-* seaborn
-* Matplotlib
+* glob
+* os
 
-Jupyter notebook and python 3.6 are needed to run the notebooks and python scripts.
+Jupyter notebook and python 3 are needed to run the notebooks and python scripts.
 
 ## Instructions on running the application
 1. Download the required data sets and if required modify the directory paths.
