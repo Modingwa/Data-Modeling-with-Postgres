@@ -1,8 +1,6 @@
 # Data Modelling with Postgres
 > 
-In this project I am taking on the role of a Data Engineer to create a database schema and an ETL pipeline for a fictional startup called Sparkify. The database schema is created on Postgres database for optimal queries on song plays. The ETL pipeline consists of functions to load JSON logs and metadata related to app user activity as well as information about songs in the app, to a Fact table and several Dimension tables in the Postgres Database.
-
-The project tasks involved the design of fact and dimension tables for a star schema and the development of Python and SQL scripts to create an ETL pipeline that transfers data from files in two local directories into tables in Postgres.
+In this project I am taking on the role of a Data Engineer to create a database schema and an ETL pipeline for a fictional startup called Sparkify. The database schema is created on Postgres database for optimal queries on song plays. The project tasks involved the design of fact and dimension tables for a star schema and the development of Python and SQL scripts to create an ETL pipeline that transfers data from files in two local directories into tables in Postgres.
 
 ## Table of contents
 
