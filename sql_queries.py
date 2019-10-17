@@ -13,7 +13,7 @@ time_table_drop = "DROP TABLE IF EXISTS time"
 
 songplay_table_create = ("""
 CREATE TABLE IF NOT EXISTS songplays (
-    songplay_id TEXT, 
+    songplay_id TEXT PRIMARY KEY, 
     start_time TEXT, 
     user_id INT, 
     level TEXT, 
@@ -27,7 +27,7 @@ CREATE TABLE IF NOT EXISTS songplays (
 
 user_table_create = ("""
 CREATE TABLE IF NOT EXISTS users(
-    user_id INT, 
+    user_id INT PRIMARY KEY, 
     first_name TEXT, 
     last_name TEXT, 
     gender TEXT, 
@@ -37,46 +37,47 @@ CREATE TABLE IF NOT EXISTS users(
 
 song_table_create = ("""
 CREATE TABLE IF NOT EXISTS songs(
-    song_id TEXT, 
-    title TEXT, 
-    artist_id TEXT, 
-    year int, 
-    duration FLOAT
+    song_id TEXT PRIMARY KEY, 
+    title TEXT NOT NULL, 
+    artist_id TEXT NOT NULL, 
+    year INT NOT NULL, 
+    duration NUMERIC NOT NULL
 );
 """)
 
 artist_table_create = ("""
 CREATE TABLE IF NOT EXISTS artists(
-    artist_id  TEXT, 
-    name TEXT, 
+    artist_id  TEXT PRIMARY KEY, 
+    name TEXT NOT NULL, 
     location TEXT, 
-    latitude FLOAT, 
-    longitude FLOAT
+    latitude NUMERIC, 
+    longitude NUMERIC
     );
 """)
 
 time_table_create = ("""
 CREATE TABLE IF NOT EXISTS time (
-    start_time timestamp, 
-    hour INT, 
-    day INT, 
-    week INT, 
-    month INT, 
-    year INT, 
-    weekday TEXT
+    start_time TIMESTAMP, 
+    hour INT NOT NULL, 
+    day INT NOT NULL, 
+    week INT NOT NULL, 
+    month INT NOT NULL, 
+    year INT NOT NULL, 
+    weekday TEXT NOT NULL
     );
 """)
 
 # INSERT RECORDS
-songplay_table_insert = sql.SQL("insert into {} values (%s, %s, %s, %s, %s, %s, %s, %s, %s)").format(sql.Identifier('songplays'))
+songplay_table_insert = sql.SQL("INSERT INTO {} VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s) \
+                            ON CONFLICT (songplay_id) DO NOTHING").format(sql.Identifier('songplays'))
 
-user_table_insert = sql.SQL("insert into {} values (%s, %s, %s, %s, %s)").format(sql.Identifier('users'))
+user_table_insert = sql.SQL("INSERT INTO {} VALUES (%s, %s, %s, %s, %s) ON CONFLICT (user_id) DO NOTHING").format(sql.Identifier('users'))
 
-song_table_insert = sql.SQL("insert into {} values (%s, %s, %s, %s, %s)").format(sql.Identifier('songs'))
+song_table_insert = sql.SQL("INSERT INTO {} VALUES (%s, %s, %s, %s, %s) ON CONFLICT (song_id) DO NOTHING").format(sql.Identifier('songs'))
 
-artist_table_insert = sql.SQL("insert into {} values (%s, %s, %s, %s, %s)").format(sql.Identifier('artists'))
+artist_table_insert = sql.SQL("INSERT INTO {} VALUES (%s, %s, %s, %s, %s) ON CONFLICT (artist_id) DO NOTHING").format(sql.Identifier('artists'))
 
-time_table_insert = sql.SQL("insert into {} values (%s, %s, %s, %s, %s, %s, %s)").format(sql.Identifier('time'))
+time_table_insert = sql.SQL("INSERT INTO {} VALUES (%s, %s, %s, %s, %s, %s, %s)").format(sql.Identifier('time'))
 
 # FIND SONGS
 song_select = ("""
@@ -84,10 +85,11 @@ SELECT
     songs.song_id,
     artists.artist_id
 FROM songs 
-LEFT JOIN artists ON
+LEFT OUTER JOIN artists ON
     songs.artist_id=artists.artist_id
 WHERE songs.title=%s AND artists.name=%s AND songs.duration=%s
 """)
+
 # QUERY LISTS
 
 create_table_queries = [songplay_table_create, user_table_create, song_table_create, artist_table_create, time_table_create]
