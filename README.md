@@ -33,4 +33,5 @@ Jupyter notebook and python 3 are needed to run the notebooks and python scripts
 
 ## Instructions on running the application
 Download the required data sets and if required modify the directory paths.
-
+> python create_tables.py
+> python etl.py
